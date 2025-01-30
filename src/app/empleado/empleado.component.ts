@@ -14,11 +14,11 @@ export class EmpleadoComponent {
   public trabajadores:Array<Empleado>;
   public trabajadorExterno:boolean;
   constructor(){
-    this.empleadoExt = new Empleado ("Pedro",47);
+    this.empleadoExt = new Empleado ("Pedro",47,true);
     this.trabajadores = [
-      new Empleado('Marta',30),
-      new Empleado('Luis',29),
-      new Empleado('Maria',45)
+      new Empleado('Marta',30,true),
+      new Empleado('Luis',29,true),
+      new Empleado('Maria',45,false),
     ]
     this.trabajadorExterno=true;
   }

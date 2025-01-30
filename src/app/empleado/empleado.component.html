@@ -1,22 +1,22 @@
-<strong>Empleado estrella</strong>
-<ul>
-    @if(trabajadorExterno){
-        <button (click)="cambiarExterno(false)">Mostrar internos</button>
-        <li>{{empleado.nombre}}</li>
-    }@else{
-        <button (click)="cambiarExterno(true)">Mostrar externos </button>
-        <h2>Lista de trabajadores internos</h2>
-        <ul>
-        @for (empleado of trabajadores; track empleado.id; let index = $index){
-            <p>Empleado: {{index+1}}</p>
-            <li>{{empleado.nombre}} 
-                @if(empleado.contratado){
-                    <strong>Trabajador contratado</strong>
-                }@else{
-                    <strong>Trabajador NO contratado</strong>
-                }
-            </li>
+    <strong>Empleado estrella</strong>
+    <ul>
+        @if(trabajadorExterno){
+            <button (click)="cambiarExterno(false)">Mostrar internos</button>
+            <li>{{empleadoExt.nombre}}</li>
+        }@else{
+            <button (click)="cambiarExterno(true)">Mostrar externos </button>
+            <h2>Lista de trabajadores internos</h2>
+            <ul>
+            @for (emp of trabajadores; track emp; let index = $index){
+                <p>Empleado: {{index+1}}</p>
+                <li>{{emp.nombre}} 
+                    @if(emp.contratado){
+                        <strong>Trabajador contratado</strong>
+                    }@else{
+                        <strong>Trabajador NO contratado</strong>
+                    }
+                </li>
+            }
+            </ul>
         }
-        </ul>
-    }
-</ul>
+    </ul>

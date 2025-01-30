@@ -1,0 +1,53 @@
+<h2>Listado de Alumnos</h2>
+
+<ul>
+  @if(verSegundo){
+    <button (click)="verSegundo = false">Mostrar alumnos de Primero</button>
+    <h3>Lista de alumnos de Segundo</h3>
+    <ul>
+      @for (alumno of alumnosSegundo; track alumno.dni; let index = $index){
+        <p>Alumno {{ index + 1 }}</p>
+        <li>
+          <strong>Nombre:</strong> {{ alumno.nombre }}  
+          <ul>
+            <li><strong>DNI:</strong> {{ alumno.dni }}</li>
+            <li><strong>Fecha de Nacimiento:</strong> {{ alumno.fechaNacimiento}}</li>
+            <li><strong>Población:</strong> {{ alumno.poblacion }}</li>
+            <li><strong>Teléfono:</strong> {{ alumno.telefono }}</li>
+            <li><strong>Módulos:</strong>
+              <ul>
+                @for (modulo of alumno.modulos; track modulo){
+                  <li>{{ modulo }}</li>
+                }
+              </ul>
+            </li>
+          </ul>
+        </li>
+      }
+    </ul>
+  }@else{
+    <button (click)="verSegundo = true">Mostrar alumnos de Segundo</button>
+    <h3>Lista de alumnos de Primero</h3>
+    <ul>
+      @for (alumno of alumnosPrimero; track alumno.dni; let index = $index){
+        <p>Alumno {{ index + 1 }}</p>
+        <li>
+          <strong>Nombre:</strong> {{ alumno.nombre }}  
+          <ul>
+            <li><strong>DNI:</strong> {{ alumno.dni }}</li>
+            <li><strong>Fecha de Nacimiento:</strong> {{ alumno.fechaNacimiento}}</li>
+            <li><strong>Población:</strong> {{ alumno.poblacion }}</li>
+            <li><strong>Teléfono:</strong> {{ alumno.telefono }}</li>
+            <li><strong>Módulos:</strong>
+              <ul>
+                @for (modulo of alumno.modulos; track modulo){
+                  <li>{{ modulo }}</li>
+                }
+              </ul>
+            </li>
+          </ul>
+        </li>
+      }
+    </ul>
+  }
+</ul>
