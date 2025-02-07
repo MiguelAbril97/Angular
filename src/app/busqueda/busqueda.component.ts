@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { BuscadorService } from '../servicios/buscador.service';
-import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-busqueda',
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './busqueda.component.html',
   styleUrl: './busqueda.component.css',
-  providers: [BuscadorService]
+  providers: [BuscadorService, HttpClient],
 })
+
 export class BusquedaComponent {
   public busqueda: string;
   public resultados: Array<any>;
@@ -18,17 +19,18 @@ export class BusquedaComponent {
   public artistas: boolean;
   public albums: boolean;
   public canciones: boolean;
+  public verTodo: boolean;
 
   constructor(public buscadorService: BuscadorService) {
     this.busqueda = '';
     this.resultados = [];
     this.filtro = [];
-    this.artistas = true;
-    this.albums = true;
-    this.canciones = true;
+    this.artistas = false;
+    this.albums = false;
+    this.canciones = false;
+    this.verTodo = true;
   }
-
-  /*buscar() {
+  buscar() {
     this.buscadorService.buscar(this.busqueda).subscribe({
       next: (respuesta) => {
         this.resultados = [...respuesta];
@@ -44,7 +46,10 @@ export class BusquedaComponent {
     });
   }
   filtrar(){
-    this.filtro = this.resultados.filter((element) => {
+    if(this.verTodo){
+      this.filtro = this.resultados;
+    }else{
+      this.filtro = this.resultados.filter((element) => {
         if (this.artistas && element.type === 'artista') {
           return true;
         }
@@ -53,16 +58,15 @@ export class BusquedaComponent {
         }
         if (this.canciones && element.type === 'cancion') {
           return true;
-        }else{
-          return false;
         }
+        return false;
       }
   );
+    }
   return this.filtro;
-}
+  }
 
-ordenarAlfabeticamente(){
-  this.filtro.sort((a, b) => a.title.localeCompare(b.title));
-}
-*/
+  ordenarAlfabeticamente(){
+    this.filtro.sort((a, b) => a.title.localeCompare(b.title));
+  }
 }

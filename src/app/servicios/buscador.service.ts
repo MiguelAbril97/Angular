@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
 export class BuscadorService {
   public url:string='';
 
-  constructor(public http: HttpClient) { 
+  constructor(private http: HttpClient) { 
     this.url = 'https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q='
   }
 
   buscar(query: string): Observable<any> {
-    const songs = `${this.url}${query}`;
+    const songs = `${this.url}${encodeURIComponent(
+      query)}`
     return this.http.get(songs);
   }
 }
