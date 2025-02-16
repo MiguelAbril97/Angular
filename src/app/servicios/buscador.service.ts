@@ -6,15 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BuscadorService {
-  public url:string='';
+  private apiUrl = 'https://api.rawg.io/api/';
+  private apiKey = 'dcb80788e8194214a4dc2a576c5869dd';
 
-  constructor(private http: HttpClient) { 
-    this.url = 'https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q='
-  }
+  constructor(private http: HttpClient) {}
 
-  buscar(query: string): Observable<any> {
-    const songs = `${this.url}${encodeURIComponent(
-      query)}`
-    return this.http.get(songs);
+  buscar(tipo: string, query: string): Observable<any> {
+    const url = `${this.apiUrl}${encodeURIComponent(tipo)}?key=${this.apiKey}&search=${encodeURIComponent(query)}`;
+    return this.http.get(url);
   }
 }
