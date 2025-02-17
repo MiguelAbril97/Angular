@@ -1,1 +1,26 @@
-<p>home works!</p>
+<div class="container">
+  <div class="sort-container">
+    <select [(ngModel)]="sortBy" (change)="ordenar()">
+      <option value="">Ordenar por: </option>
+      <option value="metacritic">Metacritic</option>
+      <option value="playtime">Tiempo de juego</option>
+      <option value="released">Fecha de lanzamiento</option>
+    </select>
+  </div>
+  <h1>Juegos más populares</h1>
+  <div class="games-grid">
+    @for (game of popularGames; track game.id) {
+      <div class="game-card">
+        <img [src]="game.background_image" [alt]="game.name">
+        <h3>{{game.name}}</h3>
+        <div class="game-info">
+          @if (game.metacritic) {
+            <span>Metacritic: {{game.metacritic}}</span>
+          }
+          <span>Playtime: {{game.playtime}} hrs</span>
+          <span>Released: {{game.released | date}}</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

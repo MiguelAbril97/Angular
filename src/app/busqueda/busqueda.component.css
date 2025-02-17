@@ -1,0 +1,19 @@
+.game-card {
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    position: relative;
+    color: white;
+  }
+  .game-card-body {
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .game-card:hover .game-card-body {
+    opacity: 1;
+  }

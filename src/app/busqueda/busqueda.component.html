@@ -1,1 +1,97 @@
-<p>Hola</p>
+<div class="container mt-4">
+  <div class="row mb-3">
+    <div class="col">
+      <input type="text" class="form-control" [(ngModel)]="busqueda" name="busqueda" placeholder="Buscar juegos...">
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary" (click)="buscar()">Buscar</button>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="tipoGames" [(ngModel)]="tipo" value="games">
+        <label class="form-check-label" for="tipoGames">Juegos</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="tipoDevelopers" [(ngModel)]="tipo" value="developers">
+        <label class="form-check-label" for="tipoDevelopers">Desarrolladores</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <button class="btn btn-secondary" (click)="ordenarAlfabeticamente()">Ordenar Alfabéticamente</button>
+      <button class="btn btn-secondary" (click)="resetearFiltro()">Reiniciar Filtros</button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="filtrarReleased" name="filtrarReleased">
+        <label class="form-check-label">Filtrar por Fecha de Lanzamiento</label>
+        <input type="text" class="form-control" [(ngModel)]="valorReleased" name="valorReleased" placeholder="Ej: 2020">
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="filtrarMetacritic">
+        <label class="form-check-label">Filtrar por media en Metacritic</label>
+        <input type="text" class="form-control" [(ngModel)]="valorMetacritic" placeholder="Ej: 85">
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="filtrarPlaytime">
+        <label class="form-check-label">Filtrar por Tiempo de Juego</label>
+        <input type="text" class="form-control" [(ngModel)]="valorPlaytime" placeholder="Ej: 10">
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="filtrarPlatforms">
+        <label class="form-check-label">Filtrar por Plataforma</label>
+        <input type="text" class="form-control" [(ngModel)]="valorPlatforms" placeholder="Ej: PC">
+      </div>
+      <button class="btn btn-primary" (click)="filtrosJuegos()">Aplicar Filtros</button>
+    </div>
+  </div>
+
+  @if(resultados.length === 0) {
+    <div class="row mt-4">
+      <div class="col-12">
+        <p>No se encontraron resultados</p>
+      </div>
+    </div>
+  } @else if(tipo === 'games') {
+    <div class="row">
+      @for (juego of resultados; track juego.id) {
+        <div class="col-md-4">
+          <div class="card mb-4 game-card" [style.background-image]="'url(' + juego.background_image + ')'">
+            <div class="card-body game-card-body">
+              <h5 class="card-title">{{ juego.name }}</h5>
+              <p class="card-text">Fecha de Lanzamiento: {{ juego.released }}</p>
+              <p class="card-text">Metacritic: {{ juego.metacritic }}</p>
+              <p class="card-text">Tiempo de Juego: {{ juego.playtime }} horas</p>
+              <p class="card-text">Plataformas: 
+                @for (platform of juego.platforms; track platform.platform.id) {
+                  {{platform.platform.name}}
+                  @if(!$last) {, }
+                }
+              </p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="row">
+      @for (developer of resultados; track developer.id) {
+        <div class="col-md-4">
+          <div class="card mb-4 game-card" [style.background-image]="'url(' + developer.image + ')'">
+            <div class="card-body game-card-body">
+              <h5 class="card-title">{{ developer.name }}</h5>
+              <p class="card-text">Juegos: {{ developer.games_count }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

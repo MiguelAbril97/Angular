@@ -3,6 +3,7 @@ import { BuscadorService } from '../servicios/buscador.service';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Juego } from '../clases/juego';
 
 @Component({
   selector: 'app-busqueda',
@@ -17,6 +18,7 @@ export class BusquedaComponent {
   public resultados: any[] = [];
   public verTodo: boolean = true;
   public tipo: string = 'games';
+  public juego: Juego = new Juego(0, '', '', '', 0, 0, []);
 
   // Copia de los resultados originales para reiniciar filtros
   private resultadosOriginales: any[] = [];
@@ -51,7 +53,7 @@ export class BusquedaComponent {
   }
 
   ordenarAlfabeticamente(): void {
-    if (this.resultados && this.resultados.length > 0) {
+    if (this.resultados.length > 0) {
       this.resultados.sort((a, b) => a.name.localeCompare(b.name));
     }
   }
@@ -61,7 +63,7 @@ export class BusquedaComponent {
       let cumple = true;
 
       // Filtro por released (fecha de lanzamiento)
-      if (this.filtrarReleased && this.valorReleased) {
+      if (this.valorReleased) {
         if (typeof item.released === 'string') {
           cumple = cumple && item.released.toLowerCase().includes(this.valorReleased.toLowerCase());
         } else {
@@ -69,25 +71,24 @@ export class BusquedaComponent {
         }
       }
 
-      // Filtro por metacritic (puntuación)
+    
       if (this.filtrarMetacritic && this.valorMetacritic) {
         if (typeof item.metacritic === 'number') {
-          cumple = cumple && item.metacritic === Number(this.valorMetacritic);
+          cumple = cumple && item.metacritic >= Number(this.valorMetacritic);
         } else {
           cumple = false;
         }
       }
 
-      // Filtro por playtime (tiempo de juego)
+      // Filtro por playtime 
       if (this.filtrarPlaytime && this.valorPlaytime) {
         if (typeof item.playtime === 'number') {
-          cumple = cumple && item.playtime === Number(this.valorPlaytime);
+          cumple = cumple && item.playtime >= Number(this.valorPlaytime);
         } else {
           cumple = false;
         }
       }
 
-      // Filtro por platforms (array de objetos con 'platform.name')
       if (this.filtrarPlatforms && this.valorPlatforms) {
         if (Array.isArray(item.platforms)) {
           cumple = cumple && item.platforms.some((p: any) => {
