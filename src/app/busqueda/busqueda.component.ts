@@ -7,7 +7,6 @@ import { Juego } from '../clases/juego';
 
 @Component({
   selector: 'app-busqueda',
-  standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './busqueda.component.html',
   styleUrls: ['./busqueda.component.css'],
