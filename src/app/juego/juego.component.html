@@ -1,0 +1,39 @@
+<div class="container mt-4">
+    @if (loading) {
+      <div class="alert alert-info text-center" role="alert">
+        Cargando juego...
+      </div>
+    } @else {
+        @if (juego) {
+            <div class="card mb-4 shadow-sm">
+                @if (juego.background_image) {
+                    <img [src]="juego.background_image" class="card-img-top img-fluid" alt="{{ juego.name }}">
+                }
+                <div class="card-body">
+                    <h2 class="card-title">{{ juego.name }}</h2>
+                    @if (juego.released) {
+                        <p class="card-text">
+                            <strong>Fecha de lanzamiento:</strong> {{ juego.released }}
+                        </p>
+                    }
+                    @if (juego.metacritic) {
+                        <p class="card-text">
+                            <strong>Rating:</strong> {{ juego.metacritic }}
+                        </p>
+                    }
+                    @if (juego.description) {
+                        <p class="card-text">{{ juego.description_raw }}</p>
+                    }
+                    @if (juego.platforms) {
+                        <p class="card-text">
+                            <strong>Plataformas:</strong>
+                            @for (platform of juego.platforms; track platform.platform.id) {
+                                <span class="badge bg-secondary me-1">{{ platform.platform.name }}</span>
+                            }
+                        </p>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>

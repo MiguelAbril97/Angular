@@ -4,10 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Juego } from '../clases/juego';
+import { RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-busqueda',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterOutlet, RouterLink],
   templateUrl: './busqueda.component.html',
   styleUrls: ['./busqueda.component.css'],
   providers: [BuscadorService, HttpClient],
@@ -28,10 +29,10 @@ export class BusquedaComponent {
   public filtrarPlaytime: boolean = false;
   public filtrarPlatforms: boolean = false;
 
-  public valorReleased: string = '';     // p. ej.: "2020" o "2020-04"
-  public valorMetacritic: string = '';     // p. ej.: "85"
-  public valorPlaytime: string = '';       // p. ej.: "10"
-  public valorPlatforms: string = '';      // p. ej.: "PC"
+  public valorReleased: string = '';     
+  public valorMetacritic: string = '';     
+  public valorPlaytime: string = '';       
+  public valorPlatforms: string = '';
 
   constructor(private buscadorService: BuscadorService) {}
 

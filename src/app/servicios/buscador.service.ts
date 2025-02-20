@@ -15,4 +15,14 @@ export class BuscadorService {
     const url = `${this.apiUrl}${encodeURIComponent(tipo)}?key=${this.apiKey}&search=${encodeURIComponent(query)}`;
     return this.http.get(url);
   }
+
+  obtenerJuego(id: string): Observable<any> {
+    const url = `${this.apiUrl}games/${id}?key=${this.apiKey}`;
+    return this.http.get(url);
+  }
+
+  obtenerDesarrollador(id: string): Observable<any> {
+    const url = `${this.apiUrl}developers/${id}?key=${this.apiKey}`;
+    return this.http.get(url);
+  }
 }

@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  @if (loading) {
+    <div class="alert alert-info text-center" role="alert">
+      Cargando desarrollador...
+    </div>
+  } @else {
+    <div class="card mb-4 shadow-sm">
+      @if (desarrollador.image_background) {
+        <img
+          [src]="desarrollador.image_background"
+          class="card-img-top img-fluid"
+          [alt]="desarrollador.name">
+      }
+      <div class="card-body">
+        <h2 class="card-title">{{ desarrollador.name }}</h2>
+        @if (desarrollador.description) {
+          <p class="card-text">{{ desarrollador.description }}</p>
+        } @else {
+          <p class="card-text text-muted">Sin descripción disponible.</p>
+        }
+        <p class="card-text">
+          <strong>Juegos publicados:</strong> {{ desarrollador.games_count }}
+        </p>
+      </div>
+    </div>
+  }
+</div>

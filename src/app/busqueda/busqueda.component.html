@@ -65,7 +65,7 @@
         <div class="col-md-4">
           <div class="card mb-4 game-card" [style.background-image]="'url(' + juego.background_image + ')'">
             <div class="card-body game-card-body">
-              <h5 class="card-title">{{ juego.name }}</h5>
+              <h5 class="card-title"><a [routerLink]="['/juego', juego.id]">{{ juego.name }}</a></h5>
               <p class="card-text">Fecha de Lanzamiento: {{ juego.released }}</p>
               <p class="card-text">Metacritic: {{ juego.metacritic }}</p>
               <p class="card-text">Tiempo de Juego: {{ juego.playtime }} horas</p>
@@ -84,9 +84,12 @@
     <div class="row">
       @for (developer of resultados; track developer.id) {
         <div class="col-md-4">
-          <div class="card mb-4 game-card" [style.background-image]="'url(' + developer.image + ')'">
+          <div class="card mb-4 game-card" [style.background-image]="'url(' + developer.image_background + ')'">
             <div class="card-body game-card-body">
-              <h5 class="card-title">{{ developer.name }}</h5>
+              <h5 class="card-title">
+                <a [routerLink]="['/desarrollador', developer.id]">
+                  {{ developer.name }}
+                </a></h5>
               <p class="card-text">Juegos: {{ developer.games_count }}</p>
             </div>
           </div>
