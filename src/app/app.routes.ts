@@ -6,6 +6,8 @@ import path from 'path';
 import { DesarrolladorComponent } from './desarrollador/desarrollador.component';
 import { JuegoComponent } from './juego/juego.component';
 import { ContactoComponent } from './contacto/contacto.component';
+import { RegistroComponent } from './registro/registro.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -13,6 +15,8 @@ export const routes: Routes = [
     {path: 'busqueda', component: BusquedaComponent},
     {path: 'desarrollador/:id', component: DesarrolladorComponent},
     {path: 'juego/:id', component: JuegoComponent},
-    {path: 'contacto',component:ContactoComponent}
+    {path: 'contacto',component:ContactoComponent},
+    {path: 'registro', component: RegistroComponent},
+    {path: 'login', component: LoginComponent},
     //{path: '**',    redirectTo: 'buscar', pathMatch: 'full'}
 ];

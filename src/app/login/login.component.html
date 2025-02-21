@@ -1,0 +1,56 @@
+<div class="container mt-5">
+    @if (loading) {
+      <div class="alert alert-info text-center" role="alert">
+        Iniciando sesión, por favor espere...
+      </div>
+    } @else {
+      <div class="card shadow mx-auto">
+        <div class="card-header bg-primary text-white">
+          <h3 class="card-title text-center mb-0">Iniciar Sesión</h3>
+        </div>
+        <div class="card-body">
+          @if (mensaje) {
+            <div class="alert" [class.alert-danger]="mensaje.includes('incorrectos')" [class.alert-warning]="!mensaje.includes('incorrectos')">
+              {{ mensaje }}
+            </div>
+          }
+          <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-control" 
+                [(ngModel)]="email" 
+                required>
+              @if (!email && loginForm.submitted) {
+                <div class="text-danger mt-1">El email es obligatorio.</div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                class="form-control" 
+                [(ngModel)]="password" 
+                required>
+              @if (!password && loginForm.submitted) {
+                <div class="text-danger mt-1">La contraseña es obligatoria.</div>
+              }
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              Iniciar Sesión
+            </button>
+          </form>
+        </div>
+        <div class="card-footer text-center">
+          <a routerLink="/registro" class="btn btn-link">¿No tienes
+            cuenta? ¡Registrate!</a>
+        </div>
+      </div>
+    }
+  </div>
+  

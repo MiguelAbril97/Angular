@@ -7,7 +7,12 @@ You can download the proyect and use it running the next docker image for the en
 ```
 docker run -it --rm -v ${PWD}:/usr/src/app -v /usr/src/app/node_modules -p 4200:4200 mflober/angapp19-image:1.0
 
-npm install bootstrap @popperjs/core
+npm install bootstrap
+npm install email-js
+npm install --save @emailjs/browser
+
+Hacer cambio en la importacion de bootstrap en style.css guardar y volver a dejarlo como estaba para que cargue bien.
+Hacer lo mismo con la importacion de emailjs-com en email.service
 
 
 ```

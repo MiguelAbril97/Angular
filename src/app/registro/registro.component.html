@@ -1,0 +1,86 @@
+<div class="container my-5">
+    @if (loading) {
+      <div class="alert alert-info text-center" role="alert">
+        Registrando usuario...
+      </div>
+    } @else {
+      <div class="card shadow">
+        <div class="card-header bg-success text-white">
+          <h3 class="mb-0">Registro de Usuario</h3>
+        </div>
+        <div class="card-body">
+          @if (mensaje.includes('registrado')) {
+            <div class="alert-success">
+              {{ mensaje }}
+            </div>
+          }@else{
+            <div class="alert-danger">
+              {{ mensaje }}
+            </div>
+          }
+          <form #registroForm="ngForm" (ngSubmit)="registrarUsuario(registroForm)" novalidate>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input 
+                type="text" 
+                id="nombre" 
+                name="nombre" 
+                class="form-control" 
+                [(ngModel)]="nombre" 
+                required>
+              @if (!nombre && registroForm.submitted) {
+                <div class="text-danger mt-1">El nombre es obligatorio.</div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-control" 
+                [(ngModel)]="email" 
+                required>
+              @if (!email && registroForm.submitted) {
+                <div class="text-danger mt-1">El email es obligatorio.</div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                class="form-control" 
+                [(ngModel)]="password" 
+                required>
+              @if (!password && registroForm.submitted) {
+                <div class="text-danger mt-1">La contraseña es obligatoria.</div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+              <input 
+                type="password" 
+                id="confirmPassword" 
+                name="confirmPassword" 
+                class="form-control" 
+                [(ngModel)]="confirmPassword" 
+                required>
+              @if (password !== confirmPassword && registroForm.submitted) {
+                <div class="text-danger mt-1">{{mensaje}}</div>
+              }
+            </div>
+            <button type="submit" class="btn btn-success w-100" [disabled]="loading">
+              Registrar
+            </button>
+          </form>
+        </div>
+        <div class="card-footer text-center">
+          <a routerLink="/login" class="btn btn-link">¿Ya tienes
+            una cuenta? Inicia sesión</a>
+        </div>
+      </div>
+    }
+</div>
+  

@@ -10,7 +10,6 @@ import { BuscadorService } from '../servicios/buscador.service';
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './desarrollador.component.html',
   styleUrls: ['./desarrollador.component.css'],
-  // No es necesario proveer HttpClient aquí ya que se importa HttpClientModule globalmente en el servicio
   providers: [BuscadorService]
 })
 export class DesarrolladorComponent implements OnInit {
