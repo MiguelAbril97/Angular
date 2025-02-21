@@ -1,0 +1,56 @@
+<div class="container mt-5">
+    @if (loading) {
+      <div class="alert alert-info text-center" role="alert">
+        Enviando...
+      </div>
+    } @else {
+      @if (info) {
+        <div class="alert" [class.alert-success]="info.startsWith('¡Tu mensaje')" [class.alert-danger]="info.startsWith('Error')">
+          {{ info }}
+        </div>
+      }
+      <form #contactoForm="ngForm" (ngSubmit)="enviarEmail(contactoForm)" novalidate>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            class="form-control"
+            [(ngModel)]="nombre"
+            required>
+          @if (!nombre && contactoForm.submitted) {
+            <div class="text-danger">El nombre es obligatorio.</div>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            [(ngModel)]="email"
+            required email>
+          @if (!email && contactoForm.submitted) {
+            <div class="text-danger">El email es obligatorio y debe ser válido.</div>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="mensaje" class="form-label">Mensaje</label>
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            class="form-control"
+            rows="5"
+            [(ngModel)]="mensaje"
+            required></textarea>
+          @if (!mensaje && contactoForm.submitted) {
+            <div class="text-danger">El mensaje es obligatorio.</div>
+          }
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    }
+  </div>
+  
