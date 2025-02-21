@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { Router,RouterLink } from '@angular/router';
+import { SesionService } from '../servicios/sesion.service';
 
 @Component({
   selector: 'app-registro',
@@ -17,7 +18,9 @@ export class RegistroComponent {
   public loading: boolean = false;
   public mensaje: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private sesionService: SesionService
+  ) {}
 //Creo el array de usuarios para poder registrar varios. Asi tambien puedo hacer 
 // varios arrays con playlist y almacenarlas dentro de los usuarios simulando
 // una base de datos
@@ -60,6 +63,9 @@ export class RegistroComponent {
  
     // El JSON.stringify convierte el objeto a un JSON string
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    //La sesion pasa a ser la del uusario registrado
+    this.sesionService.inicio(usuario);
+
     this.mensaje = 'Usuario registrado';
     form.resetForm();
     

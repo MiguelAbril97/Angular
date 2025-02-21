@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { Router,RouterLink } from '@angular/router';
+import { SesionService } from '../servicios/sesion.service';
 
 @Component({
   selector: 'app-login',
   imports: [FormsModule,RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   public email: string = '';
@@ -14,7 +15,9 @@ export class LoginComponent {
   public loading: boolean = false;
   public mensaje: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,    
+    private sesionService: SesionService
+  ) {}
 
   login(form: NgForm): void {
     
@@ -38,6 +41,7 @@ export class LoginComponent {
       this.loading = false;
       return;
     }else{
+      this.sesionService.inicio(usuario);
       this.router.navigate(['']);
     }
     this.email = '';
