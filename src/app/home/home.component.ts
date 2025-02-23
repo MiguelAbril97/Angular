@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { BuscadorService } from '../servicios/buscador.service';
 import { Juego } from '../clases/juego';
+import { ColectorService } from '../servicios/colector.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -15,7 +17,9 @@ export class HomeComponent implements OnInit {
   public popularGames: Juego[] = [];
   public sortBy:string = '';
   public resultados = [];
-  constructor(private buscadorService: BuscadorService) {}
+  constructor(private buscadorService: BuscadorService,
+    protected colector: ColectorService
+  ) {}
 
   ngOnInit(): void {
    this.buscarPopulares();
@@ -35,6 +39,14 @@ export class HomeComponent implements OnInit {
         console.error(error);
       }
     });
+  }
+
+  toggleFavorite(juego: Juego):void{
+    if(this.colector.esFavorito(juego.id)){
+      this.colector.eliminarFavorito(juego.id);
+    }else{
+      this.colector.agregarFavorito(juego.id);
+    }
   }
 
   ordenar(): void {

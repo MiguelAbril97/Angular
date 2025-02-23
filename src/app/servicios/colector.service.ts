@@ -12,9 +12,13 @@ export class ColectorService {
 
   constructor() {}
 
+  esFavorito(id: number): boolean {
+    return this.favoritosIds.value.includes(id);
+  }
+  
   agregarFavorito(id: number): void {
     
-    if (!this.favoritosIds.value.includes(id)) {
+    if (!this.esFavorito(id)) {
 
       let nuevosFavoritos = [...this.favoritosIds.value, id];
 
@@ -30,9 +34,6 @@ export class ColectorService {
     this.favoritosIds.next(nuevosFavoritos);
   }
 
-  esFavorito(id: number): boolean {
-    return this.favoritosIds.value.includes(id);
-  }
 
   obtenerFavoritos(): number[] {
     return this.favoritosIds.value;

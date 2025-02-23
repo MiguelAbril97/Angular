@@ -23,13 +23,13 @@ export class ColeccionComponent {
         this.mensaje = "Inicie sesion o create una cuenta para añadir juegos aquí"
       }else if(this.coleccion.length < 1){
         this.mensaje = "Añade juegos a favoritos para verlos aquí"
-      }else{
-        this.coleccion
       }
     }
 
     ngOnInit(): void{
       this.getColeccion();
     }
+
+
 
 }

@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="sort-container">
-    <select [(ngModel)]="sortBy" (change)="ordenar()">
+<div class="container mt-4">
+  <div class="sort-container mb-3">
+    <select class="form-control" [(ngModel)]="sortBy" (change)="ordenar()">
       <option value="">Ordenar por: </option>
       <option value="metacritic">Metacritic</option>
       <option value="playtime">Tiempo de juego</option>
@@ -8,17 +8,27 @@
     </select>
   </div>
   <h1>Juegos más populares</h1>
-  <div class="games-grid">
+  <div class="row">
     @for (game of popularGames; track game.id) {
-      <div class="game-card">
-        <img [src]="game.background_image" [alt]="game.name">
-        <h3>{{game.name}}</h3>
-        <div class="game-info">
-          @if (game.metacritic) {
-            <span>Metacritic: {{game.metacritic}}</span>
-          }
-          <span>Playtime: {{game.playtime}} hrs</span>
-          <span>Released: {{game.released | date}}</span>
+      <div class="col-md-4">
+        <div class="card mb-4 game-card" [style.background-image]="'url(' + game.background_image + ')'">
+          <div class="card-body game-card-body">
+            <h5 class="card-title">
+              <a [routerLink]="['/juego', game.id]">{{ game.name }}</a>
+              <button class="btn btn-link favorite-btn" (click)="toggleFavorite(game.id)">
+                <i class="fas" [class.fa-heart]="colector.esFavorito(game.id)" [class.fa-heart-o]="!colector.esFavorito(game.id)"></i>
+              </button>
+            </h5>
+            <p class="card-text">Fecha de Lanzamiento: {{ game.released | date }}</p>
+            <p class="card-text">Metacritic: {{ game.metacritic }}</p>
+            <p class="card-text">Tiempo de Juego: {{ game.playtime }} horas</p>
+            <p class="card-text">Plataformas: 
+              @for (platform of game.platforms; track platform.platform.id) {
+                {{platform.platform.name}}
+                @if(!$last) {, }
+              }
+            </p>
+          </div>
         </div>
       </div>
     }

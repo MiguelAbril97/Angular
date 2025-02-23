@@ -1,5 +1,6 @@
 export class Platform {
-    constructor(private name: string) {
-      this.name = name;
-    }
-  }
+  constructor(
+    public id: number,
+    public name: string
+  ) {}
+}
