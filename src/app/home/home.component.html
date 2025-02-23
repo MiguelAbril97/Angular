@@ -8,6 +8,8 @@
     </select>
   </div>
   <h1>Juegos más populares</h1>
+  <p>Bienvenido a nuestra aplicación de búsqueda de juegos. Aquí puedes encontrar 
+    los juegos más populares, ordenarlos y filtrarlos según tus preferencias.</p>
   <div class="row">
     @for (game of popularGames; track game.id) {
       <div class="col-md-4">
@@ -15,11 +17,11 @@
           <div class="card-body game-card-body">
             <h5 class="card-title">
               <a [routerLink]="['/juego', game.id]">{{ game.name }}</a>
-              <button class="btn btn-link favorite-btn" (click)="toggleFavorite(game.id)">
-                <i class="fas" [class.fa-heart]="colector.esFavorito(game.id)" [class.fa-heart-o]="!colector.esFavorito(game.id)"></i>
+              <button class="btn btn-link collection-btn" (click)="toggleFavorite(game.id)">
+                {{ colector.esFavorito(game.id) ? 'Eliminar de Colección' : 'Añadir a Colección' }}
               </button>
             </h5>
-            <p class="card-text">Fecha de Lanzamiento: {{ game.released | date }}</p>
+            <p class="card-text">Fecha de Lanzamiento: {{ game.released }}</p>
             <p class="card-text">Metacritic: {{ game.metacritic }}</p>
             <p class="card-text">Tiempo de Juego: {{ game.playtime }} horas</p>
             <p class="card-text">Plataformas: 

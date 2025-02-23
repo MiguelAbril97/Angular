@@ -38,4 +38,5 @@ export class ColectorService {
   obtenerFavoritos(): number[] {
     return this.favoritosIds.value;
   }
+
 }

@@ -11,7 +11,7 @@ import { ColectorService } from '../servicios/colector.service';
 export class ColeccionComponent {
   
   public mensaje : String = ''; 
-  public coleccion : Array <number> = []
+  public coleccion : Array <any> = []
   constructor(    
       protected sesionService: SesionService,
       private colectorService: ColectorService

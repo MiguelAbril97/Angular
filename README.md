@@ -11,6 +11,7 @@ npm install bootstrap
 npm install email-js
 npm install --save @emailjs/browser
 
+
 Hacer cambio en la importacion de bootstrap en style.css guardar y volver a dejarlo como estaba para que cargue bien.
 Hacer lo mismo con la importacion de emailjs-com en email.service
 

@@ -17,13 +17,14 @@ export class HomeComponent implements OnInit {
   public popularGames: Juego[] = [];
   public sortBy:string = '';
   public resultados = [];
+
   constructor(private buscadorService: BuscadorService,
     protected colector: ColectorService
   ) {}
 
   ngOnInit(): void {
    this.buscarPopulares();
-  }
+      }
 
   buscarPopulares(): void {
     this.buscadorService.buscar('games','').subscribe({
@@ -41,11 +42,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  toggleFavorite(juego: Juego):void{
-    if(this.colector.esFavorito(juego.id)){
-      this.colector.eliminarFavorito(juego.id);
+  toggleFavorite(juegoId: number):void{
+    if(this.colector.esFavorito(juegoId)){
+      this.colector.eliminarFavorito(juegoId);
     }else{
-      this.colector.agregarFavorito(juego.id);
+      this.colector.agregarFavorito(juegoId);
     }
   }
 

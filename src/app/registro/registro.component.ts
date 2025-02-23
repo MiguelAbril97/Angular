@@ -14,7 +14,7 @@ export class RegistroComponent {
   public email: string = '';
   public password: string = '';
   public confirmPassword: string = '';
-  
+  public coleccion:Array<any> = [];
   public loading: boolean = false;
   public mensaje: string = '';
 
@@ -56,7 +56,8 @@ export class RegistroComponent {
     let usuario = {
       nombre: this.nombre,
       email: this.email,
-      password: this.password
+      password: this.password,
+      coleccion:this.coleccion
     };
     
     usuarios.push(usuario);

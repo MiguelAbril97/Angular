@@ -1,6 +1,7 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { ColectorService } from './colector.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import { isPlatformBrowser } from '@angular/common';
 export class SesionService {
   protected logged = new BehaviorSubject<boolean>(false);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+  private colector:ColectorService) {
     if (isPlatformBrowser(this.platformId)) {
       this.logged = new BehaviorSubject<boolean>(this.checkSesion());
     }
@@ -38,6 +40,11 @@ export class SesionService {
       return user ? JSON.parse(user) : null;
     }
     return null;
+  }
+
+  asociarColeccion(){
+    let usuario = this.getCurrentUser();
+    usuario['coleccion'].value = this.colector.obtenerFavoritos();
   }
 
   private checkSesion(): boolean {
