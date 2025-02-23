@@ -1,10 +1,11 @@
 import { Component,OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SesionService } from '../servicios/sesion.service';
 import { ColectorService } from '../servicios/colector.service';
 
 @Component({
   selector: 'app-coleccion',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './coleccion.component.html',
   styleUrl: './coleccion.component.css'
 })
@@ -14,7 +15,7 @@ export class ColeccionComponent {
   public coleccion : Array <any> = []
   constructor(    
       protected sesionService: SesionService,
-      private colectorService: ColectorService
+      protected colectorService: ColectorService
     ) {}
 
     getColeccion(): void{
@@ -28,6 +29,14 @@ export class ColeccionComponent {
 
     ngOnInit(): void{
       this.getColeccion();
+    }
+
+    toggleFavorite(juegoId: number):void{
+      if(this.colectorService.esFavorito(juegoId)){
+        this.colectorService.eliminarFavorito(juegoId);
+      }else{
+        this.colectorService.agregarFavorito(juegoId);
+      }
     }
 
 

@@ -7,7 +7,7 @@
             <h5 class="card-title">
               <a [routerLink]="['/juego', game.id]">{{ game.name }}</a>
               <button class="btn btn-link collection-btn" (click)="toggleFavorite(game.id)">
-                {{ colector.esFavorito(game.id) ? 'Eliminar de Colección' : 'Añadir a Colección' }}
+                {{ colectorService.esFavorito(game.id) ? 'Eliminar de Colección' : 'Añadir a Colección' }}
               </button>
             </h5>
             <p class="card-text">Fecha de Lanzamiento: {{ game.released }}</p>
